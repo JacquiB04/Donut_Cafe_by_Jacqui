@@ -52,7 +52,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tvRed"
+                android:id="@+id/tv_red"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
@@ -61,7 +61,7 @@
                 android:textSize="24sp" />
 
             <TextView
-                android:id="@+id/tvGreen"
+                android:id="@+id/tv_green"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
@@ -70,7 +70,7 @@
                 android:textSize="24sp" />
 
             <TextView
-                android:id="@+id/tvBlue"
+                android:id="@+id/tv_blue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
@@ -87,21 +87,21 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tvred_num"
+                android:id="@+id/tv_red_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0"
                 android:textSize="24sp" />
 
             <TextView
-                android:id="@+id/tvgreen_num"
+                android:id="@+id/tv_green_num"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="0"
                 android:textSize="24sp" />
 
             <TextView
-                android:id="@+id/tvblue_num"
+                android:id="@+id/tv_blue_num"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="0"
@@ -116,7 +116,7 @@
             android:orientation="vertical">
 
             <SeekBar
-                android:id="@+id/Red"
+                android:id="@+id/sb_red"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -125,7 +125,7 @@
                 android:max="255" />
 
             <SeekBar
-                android:id="@+id/Green"
+                android:id="@+id/sb_green"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -134,7 +134,7 @@
                 android:max="255" />
 
             <SeekBar
-                android:id="@+id/Blue"
+                android:id="@+id/sb_blue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -154,7 +154,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/takeupspace"
+            android:id="@+id/take_space"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
