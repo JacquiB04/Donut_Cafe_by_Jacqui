@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:text="Name of Element"
+            android:text="Tap an object!"
             android:textSize="30sp" />
     </LinearLayout>
 
@@ -28,7 +28,7 @@
         android:orientation="horizontal">
 
         <edu.up.donutcafe.DonutCanvas
-            android:id="@+id/donut_cafe"
+            android:id="@+id/donutcanvas"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
@@ -121,7 +121,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:layout_weight="0"
+                android:layout_weight="1"
                 android:max="255" />
 
             <SeekBar
@@ -130,7 +130,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:layout_weight="0"
+                android:layout_weight="1"
                 android:max="255" />
 
             <SeekBar
@@ -139,28 +139,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:layout_weight="0"
+                android:layout_weight="1"
                 android:max="255" />
 
         </LinearLayout>
 
-    </LinearLayout>
-
-    <!--This layout takes up space so that the GUI on the tablet is fully visible-->
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/take_space"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:text="Take up some space"
-            android:textColor="#FFFFFFFF"
-            android:textSize="24sp" />
     </LinearLayout>
 
 </LinearLayout>

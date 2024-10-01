@@ -2,11 +2,12 @@ package edu.up.donutcafe;
 
 /**
  * @author: Jacqui Bouchard
- * @Assignment: Custom Coloring HW PartA
+ * @date: 09/30/2024
+ * @Assignment: Custom Coloring HW
  * @file: DonutCanvas.java
  * @Description:
- *  This file contains the DonutCanvas class which extends the SurfaceView. This class
- *  includes the methods for drawing the elements onto the surface view.
+ *  This file contains the DonutCanvas class which extends the SurfaceView. This class includes
+ *  the methods for drawing the elements onto the surface view.
  */
 
 import android.content.Context;
@@ -16,34 +17,10 @@ import android.util.AttributeSet;
 import android.view.SurfaceView;
 
 public class DonutCanvas extends SurfaceView {
-
-    //The paint of each element
-    private Paint tablePaint = new Paint();
-    private Paint platePaint = new Paint();
-    private Paint donutPaint = new Paint();
-    private Paint napkinPaint = new Paint();
-    private Paint notePaint = new Paint();
-    private Paint pencilPaint = new Paint();
-
-    //Element Dimensions
-    public static final float plateLeft = 350.0f;
-    public static final float plateTop = 300.0f;
-    public static final float plateRadius = 200.0f;
-    public static final float napkinLeft = 600.0f;
-    public static final float napkinTop = 520.0f;
-    public static final float napkinWidth = 250.0f;
-    public static final float noteLeft = 1100.0f;
-    public static final float noteTop = 300.0f;
-    public static final float noteWidth = 350.0f;
-    public static final float noteLength = 450.0f;
-    public static final float pencilLeft = 1550.0f;
-    public static final float pencilTop = 400.0f;
-    public static final float pencilWidth = 15.0f;
-    public static final float pencilLength = 250.0f;
+    private DonutModel myModel = new DonutModel();
 
     /**
      * Constructs the DonutCanvas class by defining the colors of each element
-     * and setting the background color of the canvas.
      *
      * @param context - abstract android class for applications
      * @param attrs - a collection of attributes as found in xml files
@@ -51,44 +28,39 @@ public class DonutCanvas extends SurfaceView {
     public DonutCanvas(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        //Tell the app that this view (i.e., LizardCanvas object)
-        //actually DOES draw something so please call the onDraw()
+        //Tell the app that this view actually DOES draw something so please call the onDraw()
         //method at the right time.
         setWillNotDraw(false);
 
         //Set up the colors
-        tablePaint.setColor(0xFFB30000);
-        tablePaint.setStyle(Paint.Style.FILL);
-        platePaint.setColor(0xFFFFFFFF);
-        platePaint.setStyle(Paint.Style.FILL);
-        donutPaint.setColor(0xFFA98148);
-        donutPaint.setStyle(Paint.Style.STROKE);
-        donutPaint.setStrokeWidth(plateRadius/3);
-        napkinPaint.setColor(0xFF000000);
-        napkinPaint.setStyle(Paint.Style.FILL);
-        notePaint.setColor(0xFF000080);
-        notePaint.setStyle(Paint.Style.FILL);
-        pencilPaint.setColor(0xFFCEB301);
-        pencilPaint.setStyle(Paint.Style.FILL);
-
-        //Fills the table color
-        //I will need to make a different method for this
-        //to account for the user changing the table color
-        setBackgroundColor(0xFFB30000);
+        myModel.tablePaint.setColor(0xFFB30000);
+        myModel.tablePaint.setStyle(Paint.Style.FILL);
+        myModel.platePaint.setColor(0xFFFFFFFF);
+        myModel.platePaint.setStyle(Paint.Style.FILL);
+        myModel.donutPaint.setColor(0xFFA98148);
+        myModel.donutPaint.setStyle(Paint.Style.STROKE);
+        myModel.donutPaint.setStrokeWidth(myModel.plateRadius/3);
+        myModel.napkinPaint.setColor(0xFF000000);
+        myModel.napkinPaint.setStyle(Paint.Style.FILL);
+        myModel.notePaint.setColor(0xFF000080);
+        myModel.notePaint.setStyle(Paint.Style.FILL);
+        myModel.pencilPaint.setColor(0xFFCEB301);
+        myModel.pencilPaint.setStyle(Paint.Style.FILL);
     }
 
     public void drawPlate(Canvas canvas, Paint paint) {
-        canvas.drawCircle(plateLeft, plateTop, plateRadius, paint);
+        canvas.drawCircle(myModel.plateX, myModel.plateY, myModel.plateRadius, paint);
     }
 
     public void drawDonut(Canvas canvas, Paint paint) {
-        canvas.drawCircle(plateLeft, plateTop,plateRadius/3, paint);
+        canvas.drawCircle(myModel.plateX, myModel.plateY,myModel.plateRadius/3, paint);
 
     }
 
     public void drawNapkin(Canvas canvas, Paint paint) {
-        canvas.drawRect(napkinLeft, napkinTop, napkinLeft + napkinWidth,
-                napkinTop + napkinWidth, paint);
+        canvas.drawRect(myModel.napkinLeft, myModel.napkinTop,
+                myModel.napkinLeft + myModel.napkinWidth,
+                myModel.napkinTop + myModel.napkinWidth, paint);
     }
 
     /**
@@ -100,14 +72,15 @@ public class DonutCanvas extends SurfaceView {
      * @param paint - notebook color
      */
     public void drawNote(Canvas canvas, Paint paint) {
-        canvas.drawRect(noteLeft, noteTop, noteLeft + noteWidth,
-                noteTop + noteLength, paint);
+        canvas.drawRect(myModel.noteLeft, myModel.noteTop,
+                myModel.noteLeft + myModel.noteWidth,
+                myModel.noteTop + myModel.noteLength, paint);
 
         //Draw notebook spirals
         int numSpirals = 5;
-        float spiralChangeY = noteLength / numSpirals;
+        float spiralChangeY = myModel.noteLength / numSpirals;
         float spiralRadius = 20.0f;
-        float spiralStartY = noteTop + spiralRadius;
+        float spiralStartY = myModel.noteTop + spiralRadius;
         Paint spiralPaint = new Paint();
         spiralPaint.setColor(0xFFFFFFFF);
         spiralPaint.setStyle(Paint.Style.STROKE);
@@ -123,14 +96,13 @@ public class DonutCanvas extends SurfaceView {
                     function for my spirals.
          */
         for (int i = 0; i < numSpirals; i++) {
-            canvas.drawArc(noteLeft - spiralRadius, spiralStartY,
-                    noteLeft + spiralRadius, spiralStartY + spiralRadius,
+            canvas.drawArc(myModel.noteLeft - spiralRadius, spiralStartY,
+                    myModel.noteLeft + spiralRadius, spiralStartY + spiralRadius,
                     0, 270, false, spiralPaint);
 
             spiralStartY += spiralChangeY;
         }
-    }
-
+    }//drawNote()
 
     /**
      * Draws the pencil element along with a flattened pencil tip.
@@ -139,15 +111,21 @@ public class DonutCanvas extends SurfaceView {
      * @param paint - pencil paint
      */
     public void drawPencil(Canvas canvas, Paint paint) {
-        canvas.drawRect(pencilLeft, pencilTop, pencilLeft + pencilWidth,
-                pencilTop + pencilLength, paint);
+        canvas.drawRect(myModel.pencilLeft, myModel.pencilTop,
+                myModel.pencilLeft + myModel.pencilWidth,
+                myModel.pencilTop + myModel.pencilLength, paint);
 
         //Draw rectangular pencil tip
         Paint pencilTip = new Paint();
         pencilTip.setColor(0xFF837E7C);
         pencilTip.setStyle(Paint.Style.FILL);
-        canvas.drawRect(pencilLeft, pencilTop + pencilLength, pencilLeft + pencilWidth,
-                pencilTop + pencilLength + 10.0f, pencilTip);
+        canvas.drawRect(myModel.pencilLeft, myModel.pencilTop + myModel.pencilLength,
+                myModel.pencilLeft + myModel.pencilWidth,
+                myModel.pencilTop + myModel.pencilLength + 10.0f, pencilTip);
+    }
+
+    public void drawTable(Canvas canvas, Paint paint) {
+        setBackgroundColor(paint.getColor());
     }
 
     /**
@@ -157,10 +135,13 @@ public class DonutCanvas extends SurfaceView {
      */
     @Override
     public void onDraw(Canvas canvas){
-        drawPlate(canvas, platePaint);
-        drawDonut(canvas, donutPaint);
-        drawNapkin(canvas, napkinPaint);
-        drawNote(canvas, notePaint);
-        drawPencil(canvas, pencilPaint);
+        drawPlate(canvas, myModel.platePaint);
+        drawDonut(canvas, myModel.donutPaint);
+        drawNapkin(canvas, myModel.napkinPaint);
+        drawNote(canvas, myModel.notePaint);
+        drawPencil(canvas, myModel.pencilPaint);
+        drawTable(canvas, myModel.tablePaint);
     }
+
+    public DonutModel getModel() { return this.myModel; }
 }
