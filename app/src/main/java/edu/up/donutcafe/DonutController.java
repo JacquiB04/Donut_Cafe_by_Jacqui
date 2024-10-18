@@ -110,32 +110,6 @@ public class DonutController implements SeekBar.OnSeekBarChangeListener,
     public void onStopTrackingTouch(SeekBar seekBar) {/* Does nothing */}
 
     /**
-     * This method handles touch events from the user interacting with the surface view.
-     *
-     * @param view - The view the motionEvent occurred on
-     * @param motionEvent - the touch from the user as an object containing information
-     * @return true - if the listener obtains the event
-     */
-    @Override
-    public boolean onTouch(View view, MotionEvent motionEvent) {
-        float x = motionEvent.getX();
-        float y = motionEvent.getY();
-        int paint = 0;
-
-        //Make sure only one element can change at a time.
-        setToFalse();
-
-        //Discern which element the user touches and get its color.
-        whichObject(x, y);
-        paint = whichPaint();
-
-        //Set the seekBars to the touched element's current sRGB values.
-        setSeekColorValues(paint);
-
-        return true;
-    }
-
-    /**
      * This method resets the booleans of an instance of DonutModel.
      */
     public void setToFalse() {
@@ -148,36 +122,12 @@ public class DonutController implements SeekBar.OnSeekBarChangeListener,
     }
 
     /**
-     * Sets the seekBars to the touched element's current sRGB values.
-     *
-     * @param paint - an integer representing a color
-     */
-    public void setSeekColorValues(int paint) {
-        /**
-         External Citation
-         Date:     29 September 2024
-         Problem:  I didn't know which methods I should use for obtaining sRGB values.
-         Resource: https://developer.android.com/reference/android/graphics/Color#public-methods
-         Solution: I read through the class and found out how to use the methods necessary.
-         */
-
-        int r = Color.red(paint);
-        int g = Color.green(paint);
-        int b = Color.blue(paint);
-
-        seekRed.setProgress(r);
-        seekGreen.setProgress(g);
-        seekBlue.setProgress(b);
-    }
-
-    /**
      * This method uses information from a touch event to discern which object the user taps.
      *
      * @param x - x-location of the touch event
      * @param y - y-location of the touch event
      */
     public void whichObject(float x, float y) {
-        int paint = 0;
 
         //Donut coordinates
         if(((x > myModel.plateX - myModel.plateRadius/3) && (x < myModel.plateX +
@@ -254,4 +204,53 @@ public class DonutController implements SeekBar.OnSeekBarChangeListener,
 
         return paint;
     }//whichPaint()
+
+    /**
+     * Sets the seekBars to the touched element's current sRGB values.
+     *
+     * @param paint - an integer representing a color
+     */
+    public void setSeekColorValues(int paint) {
+        /**
+         External Citation
+         Date:     29 September 2024
+         Problem:  I didn't know which methods I should use for obtaining sRGB values.
+         Resource: https://developer.android.com/reference/android/graphics/Color#public-methods
+         Solution: I read through the class and found out how to use the methods necessary.
+         */
+
+        int r = Color.red(paint);
+        int g = Color.green(paint);
+        int b = Color.blue(paint);
+
+        seekRed.setProgress(r);
+        seekGreen.setProgress(g);
+        seekBlue.setProgress(b);
+    }
+
+    /**
+     * This method handles touch events from the user interacting with the surface view.
+     *
+     * @param view - The view the motionEvent occurred on
+     * @param motionEvent - the touch from the user as an object containing information
+     * @return true - if the listener obtains the event
+     */
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        float x = motionEvent.getX();
+        float y = motionEvent.getY();
+        int paint;
+
+        //Make sure only one element can change at a time.
+        setToFalse();
+
+        //Discern which element the user touches and get its color.
+        whichObject(x, y);
+        paint = whichPaint();
+
+        //Set the seekBars to the touched element's current sRGB values.
+        setSeekColorValues(paint);
+
+        return true;
+    }
 }
